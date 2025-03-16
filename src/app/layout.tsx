@@ -5,6 +5,7 @@ import { Geist } from 'next/font/google'
 // 导入全局样式文件
 import "./globals.css";
 import { ThemeProvider } from '@/providers/theme-provider'
+import Nav from '@/components/Nav'
 
 // 配置 Geist Sans 字体
 const geist = Geist({ subsets: ['latin'] })
@@ -24,14 +25,15 @@ export default function RootLayout({
   return (
     // 定义 HTML 文档
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${geist.className} bg-gray-50 min-h-screen`}>
+      <body className="font-sans antialiased relative">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main>
+          <Nav />
+          <main className="relative">
             {children}
           </main>
         </ThemeProvider>
