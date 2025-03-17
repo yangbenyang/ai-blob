@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { Sun, Moon, Menu, AlignLeft } from 'lucide-react'
-import { RainbowButton } from "@/components/magicui/rainbow-button";
 
 export default function Nav() {
   const [mounted, setMounted] = useState(false)
@@ -17,7 +16,7 @@ export default function Nav() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
+      <div className="container flex h-14 items-center pl-10 pr-10 mr-auto ml-auto">
         {/* 移动端菜单按钮 */}
         <button 
           type="button"
@@ -76,10 +75,14 @@ export default function Nav() {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-transparent"
             >
-              {theme === 'dark' ? (
-                <Sun className="h-[24px] w-[24px]" />
+              {mounted ? (
+                theme === 'dark' ? (
+                  <Sun className="h-[24px] w-[24px]" />
+                ) : (
+                  <Moon className="h-[24px] w-[24px]" />
+                )
               ) : (
-                <Moon className="h-[24px] w-[24px]" />
+                <span className="h-[24px] w-[24px]" /> // 保持占位避免布局偏移
               )}
               <span className="sr-only">Toggle theme</span>
             </button>
@@ -111,4 +114,4 @@ export default function Nav() {
       )}
     </nav>
   )
-} 
+}
